@@ -44,8 +44,7 @@ def predict_from_chain():
         res.append(model.predict(np.array([[val1, val2]])))
         res.append(model.predict(np.array([[res[-1][0], val2]])))
         res.append(model.predict(np.array([[res[-2][0], res[-1][0]]])))
-
-        predictions = [abs(float(r)) % 400 for r in res]
+        predictions = [300 + (abs(float(r)) % 200) for r in res]
         return jsonify({"input": [val1, val2], "prediction": predictions}), 200
 
     except Exception as e:
